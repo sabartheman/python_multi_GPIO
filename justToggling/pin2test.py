@@ -10,9 +10,9 @@ GPIO.setup(10,GPIO.OUT)
 
 def toggle_a_single_pin_1hz():
     GPIO.output(10, GPIO.HIGH)
-    sleep(.5)
+    sleep(1)
     GPIO.output(10, GPIO.LOW)
-    sleep(.5)
+    sleep(1)
 
 def main():
     while(True):
