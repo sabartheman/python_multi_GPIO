@@ -6,7 +6,7 @@ from time import sleep
 #pin 24 has a pull up   resistor
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(27,OUTPUT)
+GPIO.setup(27,GPIO.OUT)
 
 def toggle_a_single_pin_1hz():
     GPIO.output(27, GPIO.HIGH)
