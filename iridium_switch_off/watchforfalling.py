@@ -1,10 +1,11 @@
-import RPI.GPIO as GPIO
+import os
+import sys
+import RPi.GPIO as GPIO
 from time import sleep
 
 
-
-#GPIO.setmode(GPIO.BCM)
-#GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 
 
 #these pins are off limits 
@@ -18,7 +19,7 @@ SWITCHGPIO   = 8
 GPIO.setup(SWITCHGPIO, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
 
-def switchCallback():
+def switchCallback(channel):
     global AUTOSHUTDOWN
 
     if AUTOSHUTDOWN == 1:
@@ -30,16 +31,23 @@ def main():
     global SWITCHGPIO
     global AUTOSHUTDOWN
 
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setwarnings(False)
+    #GPIO.setmode(GPIO.BCM)
+    #GPIO.setwarnings(False)
     GPIO.setup(SWITCHGPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
-    GPIO.add_event_detect(SWITCHGPIO, GPIO.FALLING, callback=switchCallback,bouncetime=200)
-
+    
 
 
+    GPIO.add_event_detect(SWITCHGPIO, GPIO.FALLING, callback=switchCallback)
 
-if '__name__' == '__main__':
+
+    try:
+        while True:
+            sleep(5)
+#            print "I have waited for 5s" 
+    except:
+        GPIO.cleanup()
+
+if __name__ == '__main__':
     main()
 
 
